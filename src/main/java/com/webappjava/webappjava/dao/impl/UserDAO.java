@@ -5,10 +5,7 @@ import com.webappjava.webappjava.entity.User;
 import com.webappjava.webappjava.exception.DAOException;
 import com.webappjava.webappjava.util.JDBCUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +32,22 @@ public class UserDAO implements IUserDAO {
             throw new DAOException("Failed to get user list.", e);
         }
         return list;
+    }
+
+    @Override
+    public void insert(User user) throws DAOException {
+        String sql = "INSERT INTO users (username, password, email, role, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getRole());
+            stmt.setTimestamp(5, Timestamp.valueOf(user.getCreatedAt()));
+            stmt.setTimestamp(6, Timestamp.valueOf(user.getUpdatedAt()));
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Failed to insert user.", e);
+        }
     }
 }

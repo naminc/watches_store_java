@@ -20,4 +20,12 @@ public class UserService implements IUserService {
             return Collections.emptyList();
         }
     }
+    @Override
+    public void insert(User user) {
+        try {
+            userDAO.insert(user);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
 }

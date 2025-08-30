@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IUserDAO {
     List<User> findAll() throws DAOException;
-//    void insert(User user) throws DAOException;
+    void insert(User user) throws DAOException;
 //    void update(User user) throws DAOException;
 //    void delete(int userId) throws DAOException;
 //    User findById(int userId) throws DAOException;
