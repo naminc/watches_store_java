@@ -50,4 +50,15 @@ public class UserDAO implements IUserDAO {
             throw new DAOException("Failed to insert user.", e);
         }
     }
+    @Override
+    public void delete(int userId) throws DAOException {
+        String sql = "DELETE FROM users WHERE id = ?";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DAOException("Failed to delete user.", e);
+        }
+    }
 }

@@ -18,6 +18,10 @@ public class HomeController extends HttpServlet {
     private final IUserService userService = new UserService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String msg = req.getParameter("msg");
+        if (msg != null) {
+            req.setAttribute("msg", msg);
+        }
         List<User> users = userService.findAll();
         req.setAttribute("users", users);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/views/web/home.jsp");

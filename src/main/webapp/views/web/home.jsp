@@ -14,6 +14,7 @@
         <th>Password</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Action</th>
     </tr>
     <c:forEach var="user" items="${users}">
         <tr>
@@ -22,8 +23,20 @@
             <td>${user.password}</td>
             <td>${user.email}</td>
             <td>${user.role}</td>
+            <td>
+                <form action="/deletetest" method="post">
+                    <input type="hidden" name="userId" value="${user.id}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
     </c:forEach>
 </table>
 </body>
 </html>
+<c:if test="${msg == 'delete_success'}">
+    <script>
+        alert("Xóa người dùng thành công!");
+        window.location.href = "/home";
+    </script>
+</c:if>

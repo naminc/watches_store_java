@@ -28,4 +28,12 @@ public class UserService implements IUserService {
             e.printStackTrace();
         }
     }
+    @Override
+    public void delete(int userId) {
+        try {
+            userDAO.delete(userId);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+    }
 }
