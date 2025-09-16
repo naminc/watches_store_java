@@ -24,7 +24,8 @@ public class HomeController extends HttpServlet {
         }
         List<User> users = userService.findAll();
         req.setAttribute("users", users);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/views/web/home.jsp");
-        dispatcher.forward(req, resp);
+        req.setAttribute("pageTitle", "Home Page");
+        req.setAttribute("contentPage", "/views/web/home.jsp");
+        req.getRequestDispatcher("/views/includes/layout.jsp").forward(req, resp);
     }
 }

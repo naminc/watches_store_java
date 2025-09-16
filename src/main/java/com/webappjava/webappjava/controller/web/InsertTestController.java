@@ -3,6 +3,7 @@ package com.webappjava.webappjava.controller.web;
 import com.webappjava.webappjava.entity.User;
 import com.webappjava.webappjava.service.IUserService;
 import com.webappjava.webappjava.service.impl.UserService;
+import com.webappjava.webappjava.util.PasswordUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,9 +30,11 @@ public class InsertTestController extends HttpServlet {
         String email = req.getParameter("email");
         String role = req.getParameter("role");
 
+        String hashedPassword = PasswordUtil.hashPassword(password);
+
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(hashedPassword);
         user.setEmail(email);
         user.setRole(role);
         user.setCreatedAt(LocalDateTime.now());
@@ -40,4 +43,3 @@ public class InsertTestController extends HttpServlet {
         resp.sendRedirect("/home");
     }
 }
-

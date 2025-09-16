@@ -61,4 +61,28 @@ public class UserDAO implements IUserDAO {
             throw new DAOException("Failed to delete user.", e);
         }
     }
+
+    @Override
+    public User findById(int userId) throws DAOException {
+        String sql = "SELECT * FROM users WHERE id=?";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getString("role"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
+                );
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Failed to find brand by ID.", e);
+        }
+        return null;
+    }
 }
