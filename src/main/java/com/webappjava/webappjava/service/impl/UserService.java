@@ -33,7 +33,6 @@ public class UserService implements IUserService {
         try {
             String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
             user.setPassword(hashedPassword);
-
             userDAO.insert(user);
         } catch (DAOException e) {
             e.printStackTrace();

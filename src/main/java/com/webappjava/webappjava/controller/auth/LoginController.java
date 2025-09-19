@@ -4,7 +4,7 @@ import com.webappjava.webappjava.entity.User;
 import com.webappjava.webappjava.service.IUserService;
 import com.webappjava.webappjava.service.impl.UserService;
 import com.webappjava.webappjava.util.FlashUtil;
-import com.webappjava.webappjava.util.ValidationUtil;
+import com.webappjava.webappjava.util.validator.LoginValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,18 +39,10 @@ public class LoginController extends HttpServlet {
         String password = req.getParameter("password");
 
         HttpSession session = req.getSession();
-        if (ValidationUtil.isNullOrEmpty(username) || ValidationUtil.isNullOrEmpty(password)) {
-            FlashUtil.setFlash(session, "Please fill all required fields!", "error");
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
-        if (!ValidationUtil.isValidUsername(username)) {
-            FlashUtil.setFlash(session, "Username must be at least 6 characters!", "error");
-            resp.sendRedirect(req.getContextPath() + "/login");
-            return;
-        }
-        if (!ValidationUtil.isValidPassword(password)) {
-            FlashUtil.setFlash(session, "Password must be at least 6 characters!", "error");
+
+        String errorMessage = LoginValidator.validate(username, password);
+        if (errorMessage != null) {
+            FlashUtil.setFlash(session, errorMessage, "error");
             resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }

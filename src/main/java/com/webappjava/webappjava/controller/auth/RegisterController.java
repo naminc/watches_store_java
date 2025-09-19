@@ -4,7 +4,7 @@ import com.webappjava.webappjava.entity.User;
 import com.webappjava.webappjava.service.IUserService;
 import com.webappjava.webappjava.service.impl.UserService;
 import com.webappjava.webappjava.util.FlashUtil;
-import com.webappjava.webappjava.util.ValidationUtil;
+import com.webappjava.webappjava.util.validator.RegisterValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,38 +45,10 @@ public class RegisterController extends HttpServlet {
         session.setAttribute("oldEmail", email);
         session.setAttribute("oldUsername", username);
 
-        if (ValidationUtil.isNullOrEmpty(email) || ValidationUtil.isNullOrEmpty(username) || ValidationUtil.isNullOrEmpty(password)) {
-            FlashUtil.setFlash(session, "Please fill all required fields!", "error");
-            resp.sendRedirect(req.getContextPath() + "/register");
-            return;
-        }
-        if (!ValidationUtil.isValidEmail(email)) {
-            FlashUtil.setFlash(session, "Invalid email address!", "error");
-            resp.sendRedirect(req.getContextPath() + "/register");
-            return;
-        }
-        if (!ValidationUtil.isValidUsername(username)) {
-            FlashUtil.setFlash(session, "Username must be 6-20 characters!", "error");
-            resp.sendRedirect(req.getContextPath() + "/register");
-            return;
-        }
-        if (!ValidationUtil.isValidPassword(password)) {
-            FlashUtil.setFlash(session, "Password must be at least 6 characters!", "error");
-            resp.sendRedirect(req.getContextPath() + "/register");
-            return;
-        }
-        if (!ValidationUtil.isPasswordConfirmed(password, confirmPassword)) {
-            FlashUtil.setFlash(session, "Passwords do not match!", "error");
-            resp.sendRedirect(req.getContextPath() + "/register");
-            return;
-        }
-        if (userService.findByUsername(username) != null) {
-            FlashUtil.setFlash(session, "Username already exists!", "error");
-            resp.sendRedirect(req.getContextPath() + "/register");
-            return;
-        }
-        if (userService.findByEmail(email) != null) {
-            FlashUtil.setFlash(session, "Email already registered!", "error");
+        String errorMessage = RegisterValidator.validate(email, username, password, confirmPassword, userService);
+
+        if (errorMessage != null) {
+            FlashUtil.setFlash(session, errorMessage, "error");
             resp.sendRedirect(req.getContextPath() + "/register");
             return;
         }
