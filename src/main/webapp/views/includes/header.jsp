@@ -54,10 +54,20 @@
                     <div class="col-lg-6">
                         <div class="top-info-wrap text-end">
                             <ul class="my-account-container">
-                                <li><a href="my-account.html">My account</a></li>
-                                <li><a href="cart.html">Cart</a></li>
-                                <li><a href="wishlist.html">Wishlist</a></li>
-                                <li><a href="checkout.html">Checkout</a></li>
+                                <c:choose>
+                                    <c:when test="${empty sessionScope.currentUser}">
+                                        <li><a href="<c:url value='/login'/>">Login</a></li>
+                                        <li><a href="<c:url value='/register'/>">Register</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="<c:url value='/account'/>">My account</a></li>
+                                        <li><a href="<c:url value='/cart'/>">Cart</a></li>
+                                        <li><a href="<c:url value='/wishlist'/>">Wishlist</a></li>
+                                        <li><a href="<c:url value='/checkout'/>">Checkout</a></li>
+                                        <li><a href="<c:url value='/logout'/>">Logout</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </ul>
                         </div>
                     </div>
@@ -73,7 +83,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-4 col-5">
                         <div class="logo-area">
-                            <a href="/"><img src="<c:url value='/assets/images/logo/logo.png' />" alt=""></a>
+                            <a href="<c:url value='/home' />"><img src="<c:url value='/assets/images/logo/logo.png' />" alt=""></a>
                         </div>
                     </div>
                     <div class="col-lg-6">

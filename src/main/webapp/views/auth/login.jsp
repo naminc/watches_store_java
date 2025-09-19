@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <ul class="breadcrumb-list">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<c:url value='/home'/>">Home</a></li>
                     <li class="breadcrumb-item active">login</li>
                 </ul>
             </div>
@@ -21,11 +21,11 @@
                 <div class="login-register-wrapper">
                     <div class="login-register-header text-center mb-4">
                         <h3>Login</h3>
-                        <p>Don't have an account? <a style="color: #c89979" href="${pageContext.request.contextPath}/register">Register here</a></p>
+                        <p>Don't have an account? <a style="color: #c89979" href="<c:url value='/register'/>">Register here</a></p>
                     </div>
                     <div class="login-form-container">
                         <div class="login-register-form">
-                            <form action="${pageContext.request.contextPath}/login" method="post">
+                            <form action="<c:url value='/login'/>" method="post">
                                 <div class="login-input-box">
                                     <input type="text" name="username" placeholder="Username" required>
                                     <input type="password" name="password" placeholder="Password" required>

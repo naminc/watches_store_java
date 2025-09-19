@@ -85,4 +85,51 @@ public class UserDAO implements IUserDAO {
         }
         return null;
     }
+    @Override
+    public User findByUsername(String username) throws DAOException {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getString("role"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
+                );
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Failed to find user by username.", e);
+        }
+        return null;
+    }
+
+    @Override
+    public User findByEmail(String email) throws DAOException {
+        String sql = "SELECT * FROM users WHERE email = ?";
+        try (Connection conn = JDBCUtil.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getString("role"),
+                        rs.getTimestamp("created_at").toLocalDateTime(),
+                        rs.getTimestamp("updated_at").toLocalDateTime()
+                );
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Failed to find user by email.", e);
+        }
+        return null;
+    }
 }

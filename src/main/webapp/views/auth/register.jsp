@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 <ul class="breadcrumb-list">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<c:url value='/home'/>">Home</a></li>
                     <li class="breadcrumb-item active">register</li>
                 </ul>
             </div>
@@ -21,16 +21,19 @@
                 <div class="login-register-wrapper">
                     <div class="login-register-header text-center mb-4">
                         <h3>Register</h3>
-                        <p>Already have an account? <a style="color: #c89979" href="${pageContext.request.contextPath}/login">Login here</a></p>
+                        <p>Already have an account? <a style="color: #c89979" href="<c:url value='/login'/>">Login here</a></p>
                     </div>
                     <div class="login-form-container">
                         <div class="login-register-form">
-                            <form action="${pageContext.request.contextPath}/register" method="post">
+                            <form action="<c:url value='/register'/>" method="post">
                                 <div class="login-input-box">
-                                    <input type="email" name="email" placeholder="Email" required>
-                                    <input type="text" name="username" placeholder="Username" required>
+                                    <input type="email" name="email" placeholder="Email" value="${not empty oldEmail ? oldEmail : ''}" required>
+                                    <input type="text" name="username" placeholder="Username" value="${not empty oldUsername ? oldUsername : ''}" required>
                                     <input type="password" name="password" placeholder="Password" required>
+                                    <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
                                 </div>
+                                <c:remove var="oldEmail" scope="session"/>
+                                <c:remove var="oldUsername" scope="session"/>
                                 <div class="button-box">
                                     <div class="login-toggle-btn">
                                         <input type="checkbox" required>
