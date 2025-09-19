@@ -1,4 +1,4 @@
-package com.webappjava.webappjava.util.validator;
+package com.webappjava.webappjava.validation;
 
 import com.webappjava.webappjava.util.ValidationUtil;
 

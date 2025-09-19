@@ -4,7 +4,7 @@ import com.webappjava.webappjava.entity.User;
 import com.webappjava.webappjava.service.IUserService;
 import com.webappjava.webappjava.service.impl.UserService;
 import com.webappjava.webappjava.util.FlashUtil;
-import com.webappjava.webappjava.util.validator.LoginValidator;
+import com.webappjava.webappjava.validation.LoginValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
