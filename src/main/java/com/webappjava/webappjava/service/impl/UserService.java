@@ -29,17 +29,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> findAll() {
-        try {
-            return userDAO.findAll();
-        } catch (DAOException e) {
-            e.printStackTrace();
-            return Collections.emptyList();
-        }
-    }
-
-    @Override
-    public void insert(User user) {
+    public void register(User user) {
         try {
             String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
             user.setPassword(hashedPassword);
@@ -47,6 +37,16 @@ public class UserService implements IUserService {
             userDAO.insert(user);
         } catch (DAOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<User> findAll() {
+        try {
+            return userDAO.findAll();
+        } catch (DAOException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
         }
     }
 

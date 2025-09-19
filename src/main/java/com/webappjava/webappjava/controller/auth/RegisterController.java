@@ -93,7 +93,7 @@ public class RegisterController extends HttpServlet {
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
 
-        userService.insert(user);
+        userService.register(user);
 
         FlashUtil.setFlash(session, "Registration successful! You can now login.", "success");
         resp.sendRedirect(req.getContextPath() + "/login");
