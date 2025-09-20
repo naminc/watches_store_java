@@ -14,31 +14,6 @@ public class UserService implements IUserService {
 
     private final IUserDAO userDAO = new UserDAO();
 
-
-    @Override
-    public User login(String username, String password) {
-        try {
-            User user = userDAO.findByUsername(username);
-            if (user != null && PasswordUtil.checkPassword(password, user.getPassword())) {
-                return user;
-            }
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    @Override
-    public void register(User user) {
-        try {
-            String hashedPassword = PasswordUtil.hashPassword(user.getPassword());
-            user.setPassword(hashedPassword);
-            userDAO.insert(user);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public List<User> findAll() {
         try {

@@ -1,9 +1,13 @@
 package com.webappjava.webappjava.controller.auth;
 
 import com.webappjava.webappjava.entity.User;
+import com.webappjava.webappjava.factory.UserFactory;
+import com.webappjava.webappjava.service.IAuthService;
 import com.webappjava.webappjava.service.IUserService;
+import com.webappjava.webappjava.service.impl.AuthService;
 import com.webappjava.webappjava.service.impl.UserService;
 import com.webappjava.webappjava.util.FlashUtil;
+import com.webappjava.webappjava.util.FormUtil;
 import com.webappjava.webappjava.validation.RegisterValidator;
 
 import javax.servlet.ServletException;
@@ -13,12 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private final IAuthService authService = new AuthService();
     private final IUserService userService = new UserService();
 
     @Override
@@ -42,8 +48,10 @@ public class RegisterController extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        session.setAttribute("oldEmail", email);
-        session.setAttribute("oldUsername", username);
+        FormUtil.saveFormData(req,
+                "oldEmail", email,
+                "oldUsername", username
+        );
 
         String errorMessage = RegisterValidator.validate(email, username, password, confirmPassword, userService);
 
@@ -53,19 +61,10 @@ public class RegisterController extends HttpServlet {
             return;
         }
 
-        session.removeAttribute("oldEmail");
-        session.removeAttribute("oldUsername");
+        FormUtil.clearFormData(req, "oldEmail", "oldUsername");
 
-        // User Entity
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setRole(User.ROLE_USER);
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
-
-        userService.register(user);
+        User user = UserFactory.createUser(username, password, email);
+        authService.register(user);
 
         FlashUtil.setFlash(session, "Registration successful! You can now login.", "success");
         resp.sendRedirect(req.getContextPath() + "/login");

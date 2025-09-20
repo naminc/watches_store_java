@@ -1,7 +1,9 @@
 package com.webappjava.webappjava.controller.auth;
 
 import com.webappjava.webappjava.entity.User;
+import com.webappjava.webappjava.service.IAuthService;
 import com.webappjava.webappjava.service.IUserService;
+import com.webappjava.webappjava.service.impl.AuthService;
 import com.webappjava.webappjava.service.impl.UserService;
 import com.webappjava.webappjava.util.FlashUtil;
 import com.webappjava.webappjava.validation.LoginValidator;
@@ -18,7 +20,7 @@ import java.io.IOException;
 public class LoginController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    private final IUserService userService = new UserService();
+    private final IAuthService authService = new AuthService();
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false);
@@ -47,7 +49,7 @@ public class LoginController extends HttpServlet {
             return;
         }
 
-        User user = userService.login(username, password);
+        User user = authService.login(username, password);
 
         if (user != null) {
             session.setAttribute("currentUser", user);
