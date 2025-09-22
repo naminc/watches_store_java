@@ -17,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
@@ -52,15 +50,12 @@ public class RegisterController extends HttpServlet {
                 "oldEmail", email,
                 "oldUsername", username
         );
-
         String errorMessage = RegisterValidator.validate(email, username, password, confirmPassword, userService);
-
         if (errorMessage != null) {
             FlashUtil.setFlash(session, errorMessage, "error");
             resp.sendRedirect(req.getContextPath() + "/register");
             return;
         }
-
         FormUtil.clearFormData(req, "oldEmail", "oldUsername");
 
         User user = UserFactory.createUser(username, password, email);
