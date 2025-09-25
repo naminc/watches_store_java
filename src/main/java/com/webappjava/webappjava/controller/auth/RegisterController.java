@@ -1,5 +1,6 @@
 package com.webappjava.webappjava.controller.auth;
 
+import com.webappjava.webappjava.constants.RoleConstants;
 import com.webappjava.webappjava.entity.User;
 import com.webappjava.webappjava.factory.UserFactory;
 import com.webappjava.webappjava.service.IAuthService;
@@ -58,7 +59,7 @@ public class RegisterController extends HttpServlet {
         }
         FormUtil.clearFormData(req, "oldEmail", "oldUsername");
 
-        User user = UserFactory.createUser(username, password, email);
+        User user = UserFactory.createUser(username, password, email, RoleConstants.USER);
         authService.register(user);
 
         FlashUtil.setFlash(session, "Registration successful! You can now login.", "success");

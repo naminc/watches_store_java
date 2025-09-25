@@ -2,8 +2,6 @@ package com.webappjava.webappjava.entity;
 import java.time.LocalDateTime;
 
 public class User extends BaseEntity {
-    public static final String ROLE_USER = "user";
-    public static final String ROLE_ADMIN = "admin";
     private String username;
     private String password;
     private String email;
