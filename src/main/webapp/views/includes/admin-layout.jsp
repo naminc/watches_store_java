@@ -1,16 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: NAMINC
-  Date: 9/25/2025
-  Time: 3:11 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ include file="/views/includes/admin-header.jsp" %>
 
-</body>
-</html>
+<jsp:include page="${contentPage}" />
+
+<%@ include file="/views/includes/admin-footer.jsp" %>
