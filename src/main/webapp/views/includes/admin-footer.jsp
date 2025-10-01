@@ -82,11 +82,31 @@
 <div class="control-sidebar-bg"></div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<c:url value='/admin-assets/libs-bower/bootstrap/dist/js/bootstrap.min.js'/>"></script>
 <script src="<c:url value='/admin-assets/adminlte/js/adminlte.min.js'/>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!-- Flash message -->
+<c:if test="${not empty sessionScope.flashMessage}">
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-bottom-right",
+            "timeOut": "4000"
+        };
+        <c:choose>
+        <c:when test="${sessionScope.flashType == 'success'}">
+        toastr.success("${sessionScope.flashMessage}");
+        </c:when>
+        <c:otherwise>
+        toastr.error("${sessionScope.flashMessage}");
+        </c:otherwise>
+        </c:choose>
+    </script>
+    <c:remove var="flashMessage" scope="session"/>
+    <c:remove var="flashType" scope="session"/>
+</c:if>
 </body>
 </html>

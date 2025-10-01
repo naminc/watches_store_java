@@ -5,5 +5,5 @@ import com.webappjava.webappjava.exception.DAOException;
 
 public interface ISettingDAO {
     Setting getSetting() throws DAOException;
-    void updateSetting(Setting setting) throws DAOException;
+    void update(Setting setting) throws DAOException;
 }

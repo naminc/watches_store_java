@@ -34,7 +34,7 @@ public class SettingFilter implements Filter {
                 return;
             }
         }
-        req.setAttribute("setting", cachedSetting);
+        req.setAttribute("settings", cachedSetting);
         chain.doFilter(request, response);
     }
     @Override

@@ -45,7 +45,7 @@ public class SettingDAO implements ISettingDAO {
     }
 
     @Override
-    public void updateSetting(Setting setting) throws DAOException {
+    public void update(Setting setting) throws DAOException {
         String sql = "UPDATE settings SET title=?, keyword=?, description=?, brand=?, " +
                 "domain=?, owner=?, email=?, phone=?, address=?, logo=?, icon=?, maintenance=?, updated_at=NOW() WHERE id=1";
         try (Connection conn = JDBCUtil.getConnection();

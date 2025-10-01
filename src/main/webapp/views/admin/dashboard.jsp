@@ -20,7 +20,7 @@
                     <span class="info-box-icon bg-aqua"><i class="ion ion-ios-box-outline"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Total Products</span>
-                        <span class="info-box-number">${totalProducts}</span>
+                        <span class="info-box-number">0</span>
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Total Categories</span>
-                        <span class="info-box-number">${totalCategories}</span>
+                        <span class="info-box-number">0</span>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Total Orders</span>
-                        <span class="info-box-number">${totalOrders}</span>
+                        <span class="info-box-number">0</span>
                     </div>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Total Users</span>
-                        <span class="info-box-number">${totalUsers}</span>
+                        <span class="info-box-number">0</span>
                     </div>
                 </div>
             </div>

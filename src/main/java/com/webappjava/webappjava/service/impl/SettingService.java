@@ -20,9 +20,9 @@ public class SettingService implements ISettingService {
     }
 
     @Override
-    public void updateSetting(Setting setting) {
+    public void update(Setting setting) {
         try {
-            settingDAO.updateSetting(setting);
+            settingDAO.update(setting);
         } catch (DAOException e) {
             e.printStackTrace();
         }
