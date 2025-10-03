@@ -17,7 +17,6 @@ public class SettingDAO implements ISettingDAO {
         try (Connection conn = JDBCUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
-
             if (rs.next()) {
                 return new Setting(
                         rs.getInt("id"),
@@ -37,7 +36,6 @@ public class SettingDAO implements ISettingDAO {
                         rs.getTimestamp("updated_at").toLocalDateTime()
                 );
             }
-
         } catch (SQLException e) {
             throw new DAOException("Failed to load settings.", e);
         }
@@ -50,7 +48,6 @@ public class SettingDAO implements ISettingDAO {
                 "domain=?, owner=?, email=?, phone=?, address=?, logo=?, icon=?, maintenance=?, updated_at=NOW() WHERE id=1";
         try (Connection conn = JDBCUtil.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-
             stmt.setString(1, setting.getTitle());
             stmt.setString(2, setting.getKeyword());
             stmt.setString(3, setting.getDescription());
@@ -63,7 +60,6 @@ public class SettingDAO implements ISettingDAO {
             stmt.setString(10, setting.getLogo());
             stmt.setString(11, setting.getIcon());
             stmt.setString(12, setting.getMaintenance());
-
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new DAOException("Failed to update settings.", e);

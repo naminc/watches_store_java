@@ -1,6 +1,7 @@
 package com.webappjava.webappjava.util;
 
 public class ValidationUtil {
+
     // Check null or empty
     public static boolean isNullOrEmpty(String str) {
         return (str == null || str.trim().isEmpty());
@@ -18,11 +19,13 @@ public class ValidationUtil {
         return email.matches(regex);
     }
 
+    // Valid Username
     public static boolean isValidUsername(String username) {
         if (isNullOrEmpty(username)) return false;
         return username.length() >= 6 && username.length() <= 32;
     }
 
+    // Valid Password
     public static boolean isValidPassword(String password) {
         if (isNullOrEmpty(password)) return false;
         return password.length() >= 6;

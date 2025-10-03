@@ -82,9 +82,9 @@
 <div class="control-sidebar-bg"></div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="<c:url value='/admin-assets/libs-bower/bootstrap/dist/js/bootstrap.min.js'/>"></script>
 <script src="<c:url value='/admin-assets/adminlte/js/adminlte.min.js'/>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <!-- Flash message -->
